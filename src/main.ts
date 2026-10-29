@@ -1,18 +1,23 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import cubeFragmentShader from './shaders/cube.frag.glsl?raw';
-import cubeVertexShader from './shaders/cube.vert.glsl?raw';
-import './style.css';
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import cubeFragmentShader from "./shaders/cube.frag.glsl?raw";
+import cubeVertexShader from "./shaders/cube.vert.glsl?raw";
+import "./style.css";
 
 const scene = new THREE.Scene();
-const camera = new THREE.OrthographicCamera(-4, 4, 4, -4, 0.1, 100);
-camera.position.z = 8;
+const camera = new THREE.PerspectiveCamera(
+  50,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  100,
+);
+camera.position.set(0, 0, 12);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-const mount = document.querySelector<HTMLElement>('#scene');
+const mount = document.querySelector<HTMLElement>("#scene");
 
 if (!mount) {
   throw new Error('Scene mount element "#scene" was not found.');
@@ -27,11 +32,14 @@ scene.add(ambientLight, directionalLight);
 
 const cubeMaterial = new THREE.ShaderMaterial({
   uniforms: {
+    uDiffuseColor: { value: new THREE.Color("#f7630e") },
     uAmbientLightColor: {
       value: ambientLight.color.clone().multiplyScalar(ambientLight.intensity),
     },
     uDirectionalLightColor: {
-      value: directionalLight.color.clone().multiplyScalar(directionalLight.intensity),
+      value: directionalLight.color
+        .clone()
+        .multiplyScalar(directionalLight.intensity),
     },
     uDirectionalLightDirection: {
       value: directionalLight.position.clone().normalize(),
@@ -41,11 +49,11 @@ const cubeMaterial = new THREE.ShaderMaterial({
   fragmentShader: cubeFragmentShader,
 });
 
-const cube = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), cubeMaterial);
+const cube = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), cubeMaterial);
 scene.add(cube);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.addEventListener('change', render);
+controls.addEventListener("change", render);
 
 function render() {
   renderer.render(scene, camera);
@@ -54,13 +62,8 @@ function render() {
 function resize() {
   const width = window.innerWidth;
   const height = window.innerHeight;
-  const aspect = width / height;
-  const viewHeight = 8;
 
-  camera.left = (-viewHeight * aspect) / 2;
-  camera.right = (viewHeight * aspect) / 2;
-  camera.top = viewHeight / 2;
-  camera.bottom = -viewHeight / 2;
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -68,5 +71,5 @@ function resize() {
   render();
 }
 
-window.addEventListener('resize', resize);
+window.addEventListener("resize", resize);
 render();
