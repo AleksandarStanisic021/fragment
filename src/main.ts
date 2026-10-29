@@ -25,8 +25,8 @@ if (!mount) {
 
 mount.appendChild(renderer.domElement);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+const ambientLight = new THREE.AmbientLight(0x0000ff, 0.3);
+const directionalLight = new THREE.DirectionalLight(0xff00ff, 1.5);
 directionalLight.position.set(4, 5, 6);
 scene.add(ambientLight, directionalLight);
 
