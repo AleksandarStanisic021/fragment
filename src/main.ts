@@ -32,14 +32,12 @@ scene.add(ambientLight, directionalLight);
 
 const cubeMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    uDiffuseColor: { value: new THREE.Color("#f7630e") },
+    uDiffuseColor: { value: new THREE.Color("#f44222") },
     uAmbientLightColor: {
-      value: ambientLight.color.clone().multiplyScalar(ambientLight.intensity),
+      value: ambientLight.color,
     },
     uDirectionalLightColor: {
-      value: directionalLight.color
-        .clone()
-        .multiplyScalar(directionalLight.intensity),
+      value: directionalLight.color,
     },
     uDirectionalLightDirection: {
       value: directionalLight.position.clone().normalize(),
