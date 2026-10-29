@@ -9,7 +9,7 @@ void main() {
   float diffuse = max(dot(normal, normalize(uDirectionalLightDirection)), 0.0);
   vec3 lighting = uAmbientLightColor + uDirectionalLightColor * diffuse;
 
-  gl_FragColor = vec4(uDiffuseColor * lighting, 1.0);
+  gl_FragColor = vec4( uDiffuseColor * lighting, 1.0);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }
