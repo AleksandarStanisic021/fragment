@@ -25,11 +25,8 @@ mat3 rotateY(float angle) {
 void main() {
   vec3 localSpacePosition = position;
 
-  float waveY = sin(time * 5.8);
 
-  localSpacePosition = rotateY(time) * localSpacePosition;
-  localSpacePosition.y += waveY;
-  
+
 
   vNormal = normalize(mat3(modelMatrix) * normal);
   vPosition = vec3(modelMatrix * vec4(localSpacePosition, 1.0));
