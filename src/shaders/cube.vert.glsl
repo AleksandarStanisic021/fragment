@@ -19,9 +19,9 @@ void main() {
 
   float waveY = sin(time * 5.8);
 
+  localSpacePosition = rotateY(time) * localSpacePosition;
   localSpacePosition.y += waveY;
   
-  localSpacePosition = rotateY(time) * localSpacePosition;
 
   vNormal = normalize(mat3(modelMatrix) * normal);
   vPosition = vec3(modelMatrix * vec4(localSpacePosition, 1.0));
