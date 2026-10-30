@@ -7,9 +7,13 @@ uniform float time;
 void main() {
   vec3 localSpacePosition = position;
 
+
+
+  vec4 worldPosition = modelMatrix * vec4(localSpacePosition, 1.0);
+
   vNormal = normalize(mat3(modelMatrix) * normal);
-  vPosition = vec3(modelMatrix * vec4(localSpacePosition, 1.0));
-  vColor = vec3(1.0, 0.0, 0.0);
+  vPosition = worldPosition.xyz;
+  vColor = vec3(0.12, 0.43, 1.0);
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(localSpacePosition, 1.0);
 }

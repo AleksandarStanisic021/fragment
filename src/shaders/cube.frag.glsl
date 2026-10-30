@@ -9,11 +9,13 @@ varying vec3 vColor;
 void main() {
   vec3 normal = normalize(vNormal);
   vec3 lightDir = normalize(uDirectionalLightDirection);
-  float diffuse = max(dot(normal, lightDir), 0.0);
 
-  float shadowAmount = 0.25 + diffuse * 0.75;
+  float diffuse = max(dot(normal, lightDir), 0.0);
+  float shadow = 0.35 + diffuse * 0.65;
+
+  vec3 baseColor = mix(vColor, uDiffuseColor, 0.35);
   vec3 lighting = uAmbientLightColor + uDirectionalLightColor * diffuse;
-  vec3 color = vColor * lighting * shadowAmount;
+  vec3 color = baseColor * lighting * shadow;
 
   gl_FragColor = vec4(color, 1.0);
 
