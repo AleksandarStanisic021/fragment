@@ -3,7 +3,7 @@ uniform vec3 uAmbientLightColor;
 uniform vec3 uDirectionalLightColor;
 uniform vec3 uDirectionalLightDirection;
 varying vec3 vNormal;
-
+varying vec3 vPosition;
 void main() {
   vec3 normal = vNormal;
   float diffuse = max(dot(normal, normalize(uDirectionalLightDirection)), 0.0);

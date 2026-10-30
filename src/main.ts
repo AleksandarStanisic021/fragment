@@ -42,6 +42,7 @@ const cubeMaterial = new THREE.ShaderMaterial({
     uDirectionalLightDirection: {
       value: directionalLight.position.clone().normalize(),
     },
+    time: { value: 0.0 },
   },
   vertexShader: cubeVertexShader,
   fragmentShader: cubeFragmentShader,
