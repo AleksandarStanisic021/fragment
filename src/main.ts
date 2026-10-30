@@ -30,7 +30,7 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1.7);
 directionalLight.position.set(4, 5, 6);
 scene.add(ambientLight, directionalLight);
 
-const sphereMaterial = new THREE.ShaderMaterial({
+const material = new THREE.ShaderMaterial({
   uniforms: {
     uDiffuseColor: { value: new THREE.Color("#1f6fff") },
     uAmbientLightColor: {
@@ -48,11 +48,8 @@ const sphereMaterial = new THREE.ShaderMaterial({
   fragmentShader: cubeFragmentShader,
 });
 
-const sphere = new THREE.Mesh(
-  new THREE.SphereGeometry(2.6, 64, 64),
-  sphereMaterial,
-);
-scene.add(sphere);
+const mesh = new THREE.Mesh(new THREE.SphereGeometry(2.6, 64, 64), material);
+scene.add(mesh);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.addEventListener("change", render);
@@ -76,9 +73,9 @@ function resize() {
 function animateFrame(timeMs: number) {
   const time = timeMs * 0.001;
 
-  sphereMaterial.uniforms.time.value = time;
-  sphere.rotation.y = time * 0.6;
-  sphere.rotation.x = time * 0.35;
+  material.uniforms.time.value = time;
+  mesh.rotation.y = time * 0.6;
+  mesh.rotation.x = time * 0.35;
   render();
   requestAnimationFrame(animateFrame);
 }
