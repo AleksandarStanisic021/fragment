@@ -5,7 +5,7 @@ uniform vec3 uDirectionalLightDirection;
 varying vec3 vNormal;
 
 void main() {
-  vec3 normal = normalize(vNormal);
+  vec3 normal = vNormal;
   float diffuse = max(dot(normal, normalize(uDirectionalLightDirection)), 0.0);
   vec3 lighting = uAmbientLightColor + uDirectionalLightColor * diffuse;
 
