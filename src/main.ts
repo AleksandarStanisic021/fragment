@@ -74,8 +74,7 @@ function animateFrame(timeMs: number) {
   const time = timeMs * 0.001;
 
   material.uniforms.time.value = time;
-  mesh.rotation.y = time * 0.6;
-  mesh.rotation.x = time * 0.35;
+
   render();
   requestAnimationFrame(animateFrame);
 }
