@@ -25,14 +25,14 @@ if (!mount) {
 
 mount.appendChild(renderer.domElement);
 
-const ambientLight = new THREE.AmbientLight(0x0000ff, 0.3);
-const directionalLight = new THREE.DirectionalLight(0xff00ff, 1.5);
+const ambientLight = new THREE.AmbientLight(0xfefefefe, 0.1);
+const directionalLight = new THREE.DirectionalLight(0xfffffff, 1.5);
 directionalLight.position.set(4, 5, 6);
 scene.add(ambientLight, directionalLight);
 
 const cubeMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    uDiffuseColor: { value: new THREE.Color("#f44222") },
+    uDiffuseColor: { value: new THREE.Color("#030a87") },
     uAmbientLightColor: {
       value: ambientLight.color,
     },
