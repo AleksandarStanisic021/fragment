@@ -70,5 +70,14 @@ function resize() {
   render();
 }
 
+function animateFrame(timeMs: number) {
+  const time = timeMs * 0.001;
+
+  cubeMaterial.uniforms.time.value = time;
+  render();
+  requestAnimationFrame(animateFrame);
+}
+
+requestAnimationFrame(animateFrame);
 window.addEventListener("resize", resize);
 render();
