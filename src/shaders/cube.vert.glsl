@@ -3,6 +3,14 @@ varying vec3 vPosition;
 
 uniform float time;
 
+float inverseLerp(float v, float inMin, float inMax) {
+  return (v - inMin) / (inMax - inMin);
+}
+
+float remap(float v, float inMin, float inMax, float outMin, float outMax) {
+ float t = inverseLerp(v, inMin, inMax);
+ return mix(outMin, outMax, t); 
+}
 
 mat3 rotateY(float angle) {
   float c = cos(angle);
